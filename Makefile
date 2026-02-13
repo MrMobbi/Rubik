@@ -13,6 +13,8 @@ INC_PATH	= -I incl
 
 	### SOURCES FILES ###
 FILES		= main.c \
+			  check_file.c \
+			  error.c \
 
 			  # OBJECT FILES
 
@@ -63,6 +65,10 @@ fclean:		clean
 
 re:			fclean all
 
-rt:			fclean all test t
+
+test:
+	./rubik rubikCube/cube1.txt
+
+rt: re test
 
 .PHONY:		clean fclean tmp re all

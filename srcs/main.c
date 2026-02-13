@@ -3,8 +3,7 @@
 
 int main(int ac, char **av)
 {
-	(void) ac;
-	(void) av;
+	ft_check_file(ac, av);
 	printf("Hello World\n");
 	return 0;
 }
