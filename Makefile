@@ -14,7 +14,10 @@ INC_PATH	= -I incl
 	### SOURCES FILES ###
 FILES		= main.c \
 			  check_file.c \
+			  cube.c \
+			  debug_print.c \
 			  error.c \
+			  utils.c \
 
 			  # OBJECT FILES
 
@@ -37,6 +40,7 @@ NL_TXT			= printf "\n"
 
 # RULES
 all:		tmp start $(NAME)
+			./rubik rubikCube/cube1.txt
 
 start:
 			@$(START_TXT)
