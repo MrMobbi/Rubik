@@ -50,6 +50,16 @@ enum e_color {
 	E_YELLOW = 5,
 };
 
+enum e_orientaion {
+	E_UP = 0,
+	E_RIGHT = 1,
+	E_LEFT = 2,
+	E_BACK = 3,
+	E_FRONT = 4,
+	E_DOWN = 5,
+};
+
+
 void	ft_check_file(int ac, char **av, t_cube *cube);
 char	***ft_create_cube(char *str);
 bool	ft_is_char_color(char c);
