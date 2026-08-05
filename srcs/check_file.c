@@ -1,6 +1,5 @@
 
 #include "../incl/rubik.h"
-#include <string.h>
 
 static bool ft_is_correct_file(char *str)
 {
@@ -44,6 +43,65 @@ static void	ft_check_cube_center(char ***face)
 			ft_print_error(ERR_MSG_CENTER_FACE);
 }
 
+static	void ft_check_colors(char *str)
+{
+	t_color	*color = calloc(sizeof(t_color), 1);
+
+	while (*str != '\n') 
+	{
+		if (D_IS_COLOR(*str) == 'W')
+			color->count_white++;
+		else if (D_IS_COLOR(*str) == 'B')
+			color->count_blue++;
+		else if (D_IS_COLOR(*str) == 'R')
+			color->count_red++;
+		else if (D_IS_COLOR(*str) == 'G')
+			color->count_green++;
+		else if (D_IS_COLOR(*str) == 'O')
+			color->count_orange++;
+		else if (D_IS_COLOR(*str) == 'Y')
+			color->count_yellow++;
+		else
+			ft_print_error("ERROR: Wrong number of colors\n");
+	}
+	if (color->count_white > 9)
+		ft_print_error("ERROR: Wrong number of colors\n");
+	else if (color->count_blue > 9)
+		ft_print_error("ERROR: Wrong number of colors\n");
+	else if (color->count_red > 9)
+		ft_print_error("ERROR: Wrong number of colors\n");
+	else if (color->count_green > 9)
+		ft_print_error("ERROR: Wrong number of colors\n");
+	else if (color->count_orange > 9)
+		ft_print_error("ERROR: Wrong number of colors\n");
+	else if (color->count_yellow > 9)
+		ft_print_error("ERROR: Wrong number of colors\n");
+}
+
+static	void ft_check_buffer(char *str)
+{
+	ft_check_colors(str);
+	bool	is_separator	= false;
+	int		count_char_face	= 0;
+	while (*str != '\n')
+	{
+		if (*str == '-')
+			is_separator = true;
+		else if (*str != '\n')
+			count_char_face++;
+		if (is_separator)
+		{
+			if (count_char_face != 9)
+				ft_print_error("ERROR: Wrong file format\n");
+			is_separator = false;
+			count_char_face = 0;
+		}
+		if (count_char_face > 9)
+			ft_print_error("ERROR: Wrong file format\n");
+		str++;
+	}
+}
+
 void	ft_check_file(int ac, char **av, t_cube *cube)
 {
 	if (ac != 2)
@@ -53,6 +111,7 @@ void	ft_check_file(int ac, char **av, t_cube *cube)
 	char	*buffer = ft_get_file(av[1]);
 	if (strlen(buffer) != D_FILE_SIZE)
 		ft_print_error(ERR_MSG_FILE_SIZE);
+	ft_check_buffer(buffer);
 	cube->face = ft_create_cube(buffer);
 	free(buffer);
 	ft_db_print_cube(cube);

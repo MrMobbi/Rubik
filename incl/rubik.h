@@ -25,6 +25,14 @@
 
 # define D_FILE_SIZE 60
 
+#define D_IS_COLOR(color)\
+	((color == 'W') ? E_WHITE : \
+	 (color == 'B') ? E_BLUE : \
+	 (color == 'R') ? E_RED :\
+	 (color == 'G') ? E_GREEN :\
+	 (color == 'O') ? E_ORANGE :\
+	 (color == 'Y') ? E_YELLOW : E_NONE)
+
 # define D_FACE_COLOR(face_nb)\
 	((face_nb == E_WHITE) ? 'W' : \
 	 (face_nb == E_BLUE) ? 'B' : \
@@ -41,6 +49,15 @@ typedef struct s_cube {
 	char	***face;
 }	t_cube;
 
+typedef struct s_color {
+	int	count_white;
+	int	count_blue;
+	int	count_red;
+	int	count_green;
+	int	count_orange;
+	int	count_yellow;
+}	t_color;
+
 enum e_color {
 	E_WHITE = 0,
 	E_BLUE = 1,
@@ -48,6 +65,7 @@ enum e_color {
 	E_GREEN = 3,
 	E_ORANGE = 4,
 	E_YELLOW = 5,
+	E_NONE = 6
 };
 
 enum e_orientaion {
